@@ -47,6 +47,7 @@ func main() {
 	var (
 		input  = flag.String("i", "", "input")
 		format = flag.String("f", "png", "format")
+		naming = flag.String("n", "", "naming rule")
 		dir    = flag.String("d", "gosplit", "directory")
 		row    = flag.Int("r", 0, "row")
 		col    = flag.Int("c", 0, "column")
@@ -55,6 +56,7 @@ func main() {
 	// read args
 	inputVal := *input
 	formatVal := *format
+	namingVal := *naming
 	dirVal := *dir
 	rowVal := *row
 	colVal := *col
@@ -97,7 +99,13 @@ func main() {
 	for i := 0; i < rowVal; i++ {
 		for j := 0; j < colVal; j++ {
 			iFile = strings.TrimSuffix(iFile, filepath.Ext(iFile))
-			out_path := iDir + dirVal + iFile + "_" + strconv.Itoa(i) + "_" + strconv.Itoa(j) + "." + formatVal
+			temp := ""
+			if namingVal == "" {
+				temp = strconv.Itoa(i) + "_" + strconv.Itoa(j)
+			} else {
+				temp = string([]rune(namingVal)[j+(i*colVal)])
+			}
+			out_path := iDir + dirVal + iFile + "_" + temp + "." + formatVal
 			newfile, err := os.Create(out_path)
 			fmt.Println("create: " + out_path)
 			defer newfile.Close()
