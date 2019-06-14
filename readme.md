@@ -22,7 +22,7 @@ input image
 
 command
 ````
-gosplit -r 3 -c 13 -i /Users/koya/go/src/github.com/desktopgame/gosplit/image/AlphaMapFill_14x28.png
+gosplit -r 3 -c 13 -i ./image/AlphaMapFill_14x28.png
 ````
 output image  
 ![image 2](image/gosplit/AlphaMapFill_14x28_0_0.png)  
